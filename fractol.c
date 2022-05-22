@@ -3,15 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct circle
+typedef struct square
 {
-	int a;
 	int x;
 	int y;
-	int xcenter;
-	int ycenter;
-	int radius;
-} Circle;
+} square;
 
 void snow (char *str)
 {
@@ -20,38 +16,59 @@ void snow (char *str)
 	void	*mlx_win;
 	int		color;
 	int i = 0;
-	Circle kreis;
-	kreis.a = 1;
+	square square2;
+
 	mlx = mlx_init();
 	color = 913831;
 	mlx_win = mlx_new_window(mlx, 500, 500, "Hello world!");
 
-	if (str[i] == '1')
+	if (str[i] == '2')
 	{
-		while (kreis.a != 360)
+		square2.x = 100;
+		square2.y = 100;
+		while (square2.x <= 300)
 		{
-			kreis.radius = 150;
-			kreis.xcenter = 250;
-			kreis.ycenter = 350;
-			mlx_pixel_put(mlx, mlx_win, kreis.x, kreis.y, color);
-			kreis.x = kreis.xcenter + kreis.xcenter * sin(kreis.a);
-			kreis.y = kreis.ycenter + kreis.ycenter * cos(kreis.a);
-			kreis.a++;
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.x++;
+		}
+		while (square2.y <= 300)
+		{
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.y++;
+		}
+		while (square2.x >= 100)
+		{
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.x--;
+		}
+		while (square2.y >= 100)
+		{
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.y--;
+		}
+		square2.x = 150;
+		square2.y = 150;
+		while (square2.x <= 250)
+		{
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.x++;
+		}
+		while (square2.y <= 250)
+		{
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.y++;
+		}
+		while (square2.x >= 150)
+		{
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.x--;
+		}
+		while (square2.y >= 150)
+		{
+			mlx_pixel_put(mlx, mlx_win, square2.x, square2.y, color);
+			square2.y--;
 		}
 	}
-	// if (str[i] == '2')
-	// {
-	// 	while (a != 360)
-	// 	{
-	// 		radius = 100;
-	// 		xcenter = 250;
-	// 		ycenter = 100;
-	// 		mlx_pixel_put(mlx, mlx_win, x, y, color);
-	// 		x = xcenter + xcenter * sin(a);
-	// 		y = ycenter + ycenter * cos(a);
-	// 		a++;
-	// 	}
-	// }
 	mlx_loop(mlx);
 	mlx_destroy_window(mlx, mlx_win);
 	free(mlx);
