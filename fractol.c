@@ -1,78 +1,67 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/15 15:37:36 by aiarinov          #+#    #+#             */
-/*   Updated: 2022/05/16 17:50:25 by aiarinov         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "./minilibx/mlx.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-int	main(void)
+typedef struct circle
 {
+	int a;
+	int x;
+	int y;
+	int xcenter;
+	int ycenter;
+	int radius;
+} Circle;
+
+void snow (char *str)
+{
+
 	void	*mlx;
 	void	*mlx_win;
 	int		color;
-	int x;
-	int y;
-	int a;
-
+	int i = 0;
+	Circle kreis;
+	kreis.a = 1;
 	mlx = mlx_init();
-	x = 250;
-	y = 250;
-	a = 1;
 	color = 913831;
 	mlx_win = mlx_new_window(mlx, 500, 500, "Hello world!");
-	// while (x < 250 && y < 250)
+
+	if (str[i] == '1')
+	{
+		while (kreis.a != 360)
+		{
+			kreis.radius = 150;
+			kreis.xcenter = 250;
+			kreis.ycenter = 350;
+			mlx_pixel_put(mlx, mlx_win, kreis.x, kreis.y, color);
+			kreis.x = kreis.xcenter + kreis.xcenter * sin(kreis.a);
+			kreis.y = kreis.ycenter + kreis.ycenter * cos(kreis.a);
+			kreis.a++;
+		}
+	}
+	// if (str[i] == '2')
 	// {
-	// 	mlx_pixel_put(mlx, mlx_win, x, y, color);
-	// 	x++;
-	// 	y++;
-	// }
-	// while (x < 400 && y > 100)
-	// {
-	// 	mlx_pixel_put(mlx, mlx_win, x, y, color);
-	// 	x++;
-	// 	y--;
-	// }
-	// while (x > 100)
-	// {
-	// 	mlx_pixel_put(mlx, mlx_win, x, y, color);
-	// 	x--;
-	// }
-	// while (x <= 300 && y != 300)
-	// {
-	// 	mlx_pixel_put(mlx, mlx_win, x, y, color);
-	// 	x++;
-	// 	while (x == 300 && y <= 300)
+	// 	while (a != 360)
 	// 	{
+	// 		radius = 100;
+	// 		xcenter = 250;
+	// 		ycenter = 100;
 	// 		mlx_pixel_put(mlx, mlx_win, x, y, color);
-	// 		y++;
+	// 		x = xcenter + xcenter * sin(a);
+	// 		y = ycenter + ycenter * cos(a);
+	// 		a++;
 	// 	}
 	// }
-	// while (x >= 100 && y >= 100)
-	// {
-	// 	mlx_pixel_put(mlx, mlx_win, x, y, color);
-	// 	x--;
-	// 	y--;
-	// }
-
-	while (x != 100 && y != 100 && a != 360)
-	{
-		mlx_pixel_put(mlx, mlx_win, x, y, color);
-		x = 100 * sin(a);
-		y = 100 * cos(a);
-		a++;
-	}
 	mlx_loop(mlx);
 	mlx_destroy_window(mlx, mlx_win);
 	free(mlx);
 }
 
+int main (int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		snow (argv[1]);
+	}
+	return(0);
+}
