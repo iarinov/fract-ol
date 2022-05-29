@@ -3,44 +3,44 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+         #
+#    By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/15 19:50:45 by annaiarinov       #+#    #+#              #
-#    Updated: 2022/05/28 20:22:44 by annaiarinov      ###   ########.fr        #
+#    Updated: 2022/05/29 15:32:05 by aiarinov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fractol
+FLAGS = -Wall -Wextra -Werror ./libft/libft.a -L ./minilibx -lmlx -framework OpenGL -framework AppKit
+NAME = 	fractol
+MLX = 	minilibx/libmlx.a
+LIBFT = libft/libft.a
+SRC = 	main.c paint_mandelbrot.c window.c
 
-FLAGS = -Wall -Werror -Wextra
-
-LIBM = minilibx/
-
-LIBFT = libft/
-
-LIBMS = minilibx/
-
-SRCS = main.c paint_mandelbrot.c window.c 
+OBJ = 	$(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME):
-		make -C $(LIBM)
-		make -C $(LIBFT)
-		gcc -o $(NAME) $(FLAGS) $(SRCS) -I $(LIBMS) -L $(LIBMS) \
-		-lmlx -L $(LIBFT) -lft -framework OpenGL -framework AppKit
+%.o: %.c
+	gcc -c -Wall -Werror -Wextra -D BUFFER_SIZE=100 $^ -o $@
+
+$(NAME): $(MLX) $(LIBFT) $(OBJ)
+	gcc $(FLAGS) $^ -o $@
+
+$(MLX):
+	make --directory=./minilibx
+
+$(LIBFT):
+	make --directory=./libft
 
 clean:
-		make -C $(LIBM) clean
-		make -C $(LIBFT) clean
+	rm -fr $(OBJ)
 
-fclean: clean
-		rm -rf $(NAME)
-		make -C $(LIBFT) fclean
+fclean:
+	make clean
+	rm -fr $(NAME)
 
 re: fclean all
-		make -C $(LIBM) re
-		make -C $(LIBFT) re
+
 
 
 

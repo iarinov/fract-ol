@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_code.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:33:46 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/05/29 12:38:21 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/05/29 15:59:41 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,20 @@
 
 #define BLUE (0xa1d4ff)
 
+#define MAX_ITER (40)
+#define MIN_RE (-2.0)
+#define MAX_RE (1.0)
+#define MIN_IM (-1.2)
+#define IMG_HEIGHT (400)
+#define IMG_WIDTH (400)
+
 typedef struct
 {
 	void *mlx_ptr;
 	void *mlx_win;
 
-	// unsigned int win_width;
-	// unsigned int win_heigh;
+	unsigned int win_width;
+	unsigned int win_heigh;
 
 }t_my_mlx;
 
@@ -39,6 +46,15 @@ typedef struct
 	unsigned int x;
 	unsigned int y;
 }t_point;
+
+typedef struct
+{
+	double c_re;
+	double c_im;
+	double z_re;
+	double z_im;
+}t_param;
+
 
 
 #endif
