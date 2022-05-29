@@ -6,7 +6,7 @@
 #    By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/15 19:50:45 by annaiarinov       #+#    #+#              #
-#    Updated: 2022/05/15 19:52:09 by annaiarinov      ###   ########.fr        #
+#    Updated: 2022/05/28 20:22:44 by annaiarinov      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = libft/
 
 LIBMS = minilibx/
 
-SRCS = fractol.c 
+SRCS = main.c paint_mandelbrot.c window.c 
 
 all: $(NAME)
 
