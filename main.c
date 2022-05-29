@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:58:25 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/05/29 12:38:46 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/05/29 17:17:06 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,9 @@ int get_fractal_name(char *name)
 void programm_center(int num_of_fractal)
 {
 	t_my_mlx mlx_main;
-	mlx_main.win_heigh = 250;
-	mlx_main.win_width = 250;
 
 	mlx_main.mlx_ptr = mlx_init();
-	mlx_main.mlx_win = mlx_new_window(mlx_main.mlx_ptr, 600, 600, "Hello world!");
+	mlx_main.mlx_win = mlx_new_window(mlx_main.mlx_ptr, IMG_HEIGHT, IMG_WIDTH, "Hello world!");
 	mlx_key_hook (mlx_main.mlx_win, &handle_key, &mlx_main);
 	if (num_of_fractal == 1)
 		paint_mandelbrot(&mlx_main);

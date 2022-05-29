@@ -6,7 +6,7 @@
 /*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:33:46 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/05/29 15:59:41 by aiarinov         ###   ########.fr       */
+/*   Updated: 2022/05/29 16:47:43 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 #define BLUE (0xa1d4ff)
 
 #define MAX_ITER (40)
-#define MIN_RE (-2.0)
-#define MAX_RE (1.0)
-#define MIN_IM (-1.2)
+// #define MIN_RE (-2.0)
+// #define MAX_RE (1.0)
+// #define MIN_IM (-1.2)
 #define IMG_HEIGHT (400)
 #define IMG_WIDTH (400)
 
@@ -43,12 +43,19 @@ typedef struct
 
 typedef struct
 {
+
 	unsigned int x;
 	unsigned int y;
 }t_point;
 
 typedef struct
 {
+	double max_im;
+	double max_re;
+	double min_im;
+	double min_re;
+	double re_factor;
+	double im_factor;
 	double c_re;
 	double c_im;
 	double z_re;
