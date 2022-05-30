@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:06:34 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/05/29 17:09:57 by aiarinov         ###   ########.fr       */
+/*   Updated: 2022/05/29 20:04:09 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,28 @@ int clean (t_my_mlx *mlx_main)
 	return (0);
 }
 
-void	mouse_move(int keycode)
+int	mouse_move(int keycode)
 {
-	double zoom;
-	t_param *param = 0;
-	if (keycode == 4 || keycode == 27 || keycode == 78)
-		zoom = 1.1;
-	else if (keycode == 5 || keycode == 24 || keycode == 69)
-		zoom = 1.0 / 1.1;
-	else
-		zoom = 0;
+
+	// double zoom = 0.0;
+keycode = 3;
+	// if (keycode == 4 || keycode == 27 || keycode == 78)
+	// 	zoom = 1.1;
+	// else if (keycode == 5 || keycode == 24 || keycode == 69)
+	// 	zoom = 1.0 / 1.1;
+	// else
+	// 	zoom = 0;
 
 
-	// param->c_re = param->min_re + x * param->re_factor;
+	//  param->c_re = param->c_re;
 	// param->c_im = param->max_im - y * param->im_factor;
 
-	param->max_re = param->c_re + (param->max_im - param->c_im) * zoom;
-	param->min_re = param->c_re + (param->min_re - param->c_re) * zoom;
-	param->max_im = param->c_im + (param->max_im - param->c_im) * zoom;
-	param->min_im = param->c_im + (param->min_im - param->c_im) * zoom;
+	// param->max_re = param->c_re + (param->max_im - param->c_im) * zoom;
+	// param->min_re = param->c_re + (param->min_re - param->c_re) * zoom;
+	// param->max_im = param->c_im + (param->max_im - param->c_im) * zoom;
+	// param->min_im = param->c_im + (param->min_im - param->c_im) * zoom;
 
-
+	return(0);
 	// image->coef_re = (image->max_re - image->min_re) / (IMG_WIDTH - 1);
 	// image->coef_im = (image->max_im - image->min_im) / (IMG_HEIGHT - 1);
 }
