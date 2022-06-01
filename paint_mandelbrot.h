@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paint_mandelbrot.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:31:49 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/05/31 18:37:23 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/01 13:19:40 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 
 void paint_mandelbrot(t_core *core);
 int	ft_strncmp(const char *str1, const char *str2, size_t n);
+void paint_julia(t_core *core);
 
 #endif

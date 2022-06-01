@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:15:10 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/05/31 21:31:06 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/01 15:11:23 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct
 {
 	void *mlx_win;
 	void *mlx_ptr;
-
+	void *mlx_img;
 	unsigned int win_width;
 	unsigned int win_heigh;
 
@@ -49,9 +49,11 @@ typedef struct
 	double im_factor;
 	double c_re;
 	double c_im;
+	double constant_re;
+	double constant_im;
 	double z_re;
 	double z_im;
-
+	int *color;
 
 }t_param;
 
