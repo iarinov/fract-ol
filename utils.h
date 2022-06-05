@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paint_mandelbrot.h                                 :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/28 20:31:49 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/05/31 18:37:23 by annaiarinov      ###   ########.fr       */
+/*   Created: 2022/06/04 14:41:33 by annaiarinov       #+#    #+#             */
+/*   Updated: 2022/06/04 14:48:31 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PAINT_MANDELBROT_H
-# define PAINT_MANDELBROT_H
+#ifndef UTILS_H
+# define UTILS_H
 
-#include <unistd.h>
-#include "window.h"
+#include <math.h>
 
-void paint_mandelbrot(t_core *core);
-int	ft_strncmp(const char *str1, const char *str2, size_t n);
+double ft_atof (char *str);
+int	ft_atoi_point(const char *str);
 
 #endif

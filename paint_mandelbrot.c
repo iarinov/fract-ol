@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   paint_mandelbrot.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:28:15 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/01 15:44:45 by aiarinov         ###   ########.fr       */
+/*   Updated: 2022/06/04 19:53:46 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color_code.h"
+
 #include "./minilibx/mlx.h"
 #include <math.h>
 #include <stdlib.h>
@@ -26,12 +26,12 @@ int get_classic(int n)
 	{
 		return 0;
 	}
-	color[0] = 0x00e8eaf6;
-	color[1] = 0x00c5cae9;
-	color[2] = 0x009fa8da;
-	color[3] = 0x007986cb;
-	color[4] = 0x005c6bc0;
-	color[5] = 0x003f51b5;
+	color[0] = 0x00421E48;
+	color[1] = 0x0019071A;
+	color[2] = 0x0009012F;
+	color[3] = 0x00040449;
+	color[4] = 0x00000764;
+	color[5] = 0x000C2C8A;
 	color[6] = 0x001852B1;
 	color[7] = 0x00397DD1;
 	color[8] = 0x0086B5E5;
@@ -45,42 +45,23 @@ int get_classic(int n)
 	return (color[n]);
 }
 
-int get_classic2(int n)
+void put_color(t_core *core, int color)
 {
-	t_core *core;
-	core->param.color[16];
-	if(n > 15 || n < 0)
-	{
-		return 0;
-	}
-	core->param.color[0] = 0x00ede7f6;
-	core->param.color[1] = 0x00d1c4e9;
-	core->param.color[2] = 0x00b39ddb;
-	core->param.color[3] = 0x009575cd;
-	core->param.color[4] = 0x007e57c2;
-	core->param.color[5] = 0x00673ab7;
-	core->param.color[6] = 0x005e35b1;
-	core->param.color[7] = 0x00512da8;
-	core->param.color[8] = 0x004527a0;
-	core->param.color[9] = 0x00311b92;
-	core->param.color[10] = 0x00b388ff;
-	core->param.color[11] = 0x007c4dff;
-	core->param.color[12] = 0x00651fff;
-	core->param.color[13] = 0x006200ea;
-	core->param.color[14] = 0x00f3e5f5;
-	core->param.color[15] = 0x00e1bee7;
-	return (core->param.color[n]);
+	char *pos;
+	pos = core->mlx_main.mlx_data_addr + (core->param.y * core->param.line_len + core->param.x * (core->param.bpp / 8));
+	*(int *)pos = color;
 }
+
 static void init_mandel_param(t_core *core)
 {
-	core->param.max_im = core->param.min_im + (core->param.max_re - core->param.min_re) * core->mlx_main.win_heigh / core->mlx_main.win_width;
-	core->param.re_factor = (core->param.max_re - core->param.min_re) / (core->mlx_main.win_width - 1);
-	core->param.im_factor = (core->param.max_im - core->param.min_im) / (core->mlx_main.win_heigh - 1);
+	core->param.max_im = core->param.min_im + (core->param.max_re - core->param.min_re) * core->mlx_main.win_heigh / core->mlx_main.win_width; // imageHeight/ImageWidth
+	core->param.re_factor = (core->param.max_re - core->param.min_re) / (core->mlx_main.win_width - 1);					  // ImageWidth because real is x
+	core->param.im_factor = (core->param.max_im - core->param.min_im) / (core->mlx_main.win_heigh - 1);					  // ImageHeight because imaginary is y
 }
 
 void paint_mandelbrot(t_core *core)
 {
-	// core->param.color = 0xfffafa;
+	int color = 0xfffafa;
 	unsigned int n;
 	double Z_re2;
 	double Z_im2;
@@ -109,26 +90,39 @@ void paint_mandelbrot(t_core *core)
 					is_inside = false;
 					break;
 				}
-				core->param.z_im = 2 * core->param.z_re * core->param.z_im + core->param.c_im;
-				core->param.z_re = Z_re2 - Z_im2 + core->param.c_re;
+				if (core->fractal_type == MANDELBROT)
+				{
+					core->param.z_im = 2 * core->param.z_re * core->param.z_im + core->param.c_im;
+					core->param.z_re = Z_re2 - Z_im2 + core->param.c_re;
+				}
+				else if (core->fractal_type == JULIA)
+				{
+					core->param.z_im = 2 * core->param.z_re * core->param.z_im + core->param.constant_im;
+					core->param.z_re = Z_re2 - Z_im2 + core->param.constant_re;
+				}
 				n++;
 			}
+			// if (n < MAX_ITER && n > 0)
+			// 	color = (n + 1 - log(log2(fabs(Z_re2 + Z_im2))));
+			// else
+			// 	color = 0;
 			if (is_inside)
 			{
-				// core->param.color = ceil(sqrt(Z_im2 + Z_re2) * 8.0);
+				color = (int)(n) %(16);
+				//color = ceil(sqrt(Z_im2 + Z_re2) * 8.0);
+				//color = (n + 1 - log(log2(fabs(Z_re2 + Z_im2))));
 			}
 			else
 			{
-
-				// color = n + 1 - log(log2(fabs(Z_re2 + Z_im2)));
-				core->param.color = n % 16;
+				//color = (int)(n) %754;
+				color = (n + 1 - log(log2(fabs(Z_re2 + Z_im2))));
 			}
-			// color = get_classic(color);
-			mlx_pixel_put(core->mlx_main.mlx_ptr, core->mlx_main.mlx_win, core->param.x, core->param.y, core->param.color);
+			color = get_classic(color);
+			put_color(core, color);
 			core->param.x++;
 		}
 		core->param.y++;
 	}
+	mlx_put_image_to_window(core->mlx_main.mlx_ptr, core->mlx_main.mlx_win, core->mlx_main.mlx_img,
+				0, 0);
 }
-
-
