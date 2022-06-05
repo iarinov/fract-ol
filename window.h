@@ -6,7 +6,7 @@
 /*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:15:10 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/04 19:46:41 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/05 16:50:23 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define WINDOW_H
 
 #define MAX_ITER (20)
-#define IMG_HEIGHT (800)
-#define IMG_WIDTH (800)
+#define IMG_HEIGHT (400)
+#define IMG_WIDTH (400)
 #define JULIA (2)
 #define MANDELBROT (1)
 

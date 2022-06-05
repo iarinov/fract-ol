@@ -6,7 +6,7 @@
 /*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:38:26 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/04 15:05:54 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/05 16:55:17 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ int ft_atoi_point(const char *str)
 		sign = -1;
 	if (*str == '-' || *str == '+')
 		str++;
-	while (*str)
+	while (*str != '\0')
 	{
 		if (*str == '.')
-		{
 			str++;
-		}
 		if (*str >= '0' && *str <= '9')
 			sum = sum * 10 + *str - '0';
 		else
@@ -51,9 +49,7 @@ double ft_atof(char *str)
 	while (str[n] != '\0')
 	{
 		if (str[n] == '.')
-		{
 			is_after_dot = 1;
-		}
 		if (is_after_dot == 1 && str[n] <= '9' && str[n] >= '0')
 			counter++;
 		n++;
@@ -65,9 +61,6 @@ double ft_atof(char *str)
 		res = i * (0.1 / mult);
 	}
 	else
-	{
 		res = i;
-	}
-
 	return (res);
 }

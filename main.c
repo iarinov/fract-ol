@@ -6,7 +6,7 @@
 /*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:58:25 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/04 19:51:10 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/05 16:53:32 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_my_mlx init_mlx(void)
 	mlx_main.win_width = IMG_WIDTH;
 	mlx_main.mlx_ptr = mlx_init();
 	mlx_main.mlx_win = mlx_new_window(mlx_main.mlx_ptr, IMG_HEIGHT, IMG_WIDTH, "Fract'ol");
-	mlx_main.mlx_img = mlx_new_image(mlx_main.mlx_img, IMG_WIDTH, IMG_HEIGHT);
+	mlx_main.mlx_img = mlx_new_image(mlx_main.mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
 	return (mlx_main);
 }
 /******BRIEF****
@@ -106,13 +106,7 @@ void programm_center(t_core *core)
 		init_event_hook(core);
 	}
 	paint_mandelbrot(core);
-
-	// else if (num_of_fractal == 2)
-	// paint_julia (mlx, mlx_win);
-	// else if (num_of_fractal == 3)
-	// paint_set(mlx, mlx_win);
-
-	mlx_loop(core->mlx_main.mlx_ptr); // to nut
+	mlx_loop(core->mlx_main.mlx_ptr);
 	mlx_destroy_window(core->mlx_main.mlx_ptr, core->mlx_main.mlx_win);
 	free(core->mlx_main.mlx_ptr);
 }
