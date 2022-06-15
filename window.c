@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:06:34 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 16:06:32 by aiarinov         ###   ########.fr       */
+/*   Updated: 2022/06/15 22:33:16 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
+# include "fractol.h"
 
 int	handle_key(int keycode, t_core *core)
 {
@@ -27,7 +28,7 @@ int	handle_key(int keycode, t_core *core)
 	else
 		return (0);
 	clean(core);
-	paint_mandelbrot(core);
+	paint_fractol(core);
 	return (0);
 }
 
@@ -62,6 +63,6 @@ int	mouse_move(int keycode, int x, int y, t_core *core)
 	if (core->param.zoom == 0)
 		core->param.zoom = 1;
 	clean(core);
-	paint_mandelbrot(core);
+	paint_fractol(core);
 	return (0);
 }

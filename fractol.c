@@ -3,149 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:28:15 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 16:00:20 by aiarinov         ###   ########.fr       */
+/*   Updated: 2022/06/15 22:50:24 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
+#include "color.h"
 
-static void	fractol_loop(t_core *core, bool *p_is_inside,
-				unsigned int *p_fractal_iter);
-static void	set_color(t_core *core, const unsigned int fractal_iter,
-				const bool is_inside);
+static void fractol_loop(t_core *core, bool *p_is_inside,
+						 unsigned int *p_fractal_iter);
 
-int	get_classic(int n)
+static void init_mandel_param(t_core *core)
 {
-	int	color[16];
+	t_param *p;
 
-	if (n > 15 || n < 0)
-	{
-		return (0);
-	}
-	color[0] = 0x00e8eaf6;
-	color[1] = 0x00c5cae9;
-	color[2] = 0x009fa8da;
-	color[3] = 0x007986cb;
-	color[4] = 0x005c6bc0;
-	color[5] = 0x003f51b5;
-	color[6] = 0x00311b92;
-	color[7] = 0x004527a0;
-	color[8] = 0x00512da8;
-	color[9] = 0x005e35b1;
-	color[10] = 0x00673ab7;
-	color[11] = 0x007e57c2;
-	color[12] = 0x009575cd;
-	color[13] = 0x00b39ddb;
-	color[14] = 0x00d1c4e9;
-	color[15] = 0x00ede7f6;
-	return (color[n]);
+	p = &core->param;
+	core->param.max_im = core->param.min_im + (core->param.max_re - core->param.min_re) * core->mlx_main.win_heigh / core->mlx_main.win_width;
+	core->param.re_factor = (core->param.max_re - core->param.min_re) / (core->mlx_main.win_width - 1);
+	core->param.im_factor = (core->param.max_im - core->param.min_im) / (core->mlx_main.win_heigh - 1);
 }
 
-void	put_color(const t_core *core, int color)
+void paint_fractol(t_core *core)
 {
-	char	*pos;
+	unsigned int n;
+	bool is_inside;
+	t_param *p;
 
-	pos = core->mlx_main.mlx_data_addr + (core->param.y * core->param.line_len
-			+ core->param.x * (core->param.bpp / 8));
-	*(int *)pos = color;
-}
-
-static void	init_mandel_param(t_core *core)
-{
-	core->param.max_im = core->param.min_im + (core->param.max_re
-			- core->param.min_re) * core->mlx_main.win_heigh
-		/ core->mlx_main.win_width;
-	core->param.re_factor = (core->param.max_re - core->param.min_re)
-		/ (core->mlx_main.win_width - 1);
-	core->param.im_factor = (core->param.max_im - core->param.min_im)
-		/ (core->mlx_main.win_heigh - 1);
-}
-
-void	paint_mandelbrot(t_core *core)
-{
-	unsigned int	n;
-	bool			is_inside;
-
-	core->param.x = 0;
-	core->param.y = 0;
+	p = &core->param;
+	p->y = 0;
 	n = 0;
 	init_mandel_param(core);
-	while (core->param.y < IMG_HEIGHT)
+	while (p->y < IMG_HEIGHT)
 	{
-		core->param.c_im = ((core->param.max_im - core->param.y
-					* core->param.im_factor)
-				/ core->param.zoom) + core->param.vert;
-		core->param.x = 0;
-		while (core->param.x < IMG_WIDTH)
+		p->c_im = (p->max_im - p->y * p->im_factor) / p->zoom + p->vert;
+		p->x = 0;
+		while (p->x < IMG_WIDTH)
 		{
-			core->param.c_re = (core->param.min_re + core->param.x
-					* core->param.re_factor)
-				/ core->param.zoom + core->param.horis;
-			core->param.z_re = core->param.c_re;
-			core->param.z_im = core->param.c_im;
+			p->c_re = (p->min_re + p->x * p->re_factor) / p->zoom + p->horis;
+			p->z_re = p->c_re;
+			p->z_im = p->c_im;
 			is_inside = true;
 			fractol_loop(core, &is_inside, &n);
 			set_color(core, n, is_inside);
-			core->param.x++;
+			p->x++;
 		}
-		core->param.y++;
+		p->y++;
 	}
 	mlx_put_image_to_window(core->mlx_main.mlx_ptr, core->mlx_main.mlx_win,
-		core->mlx_main.mlx_img, 0, 0);
+							core->mlx_main.mlx_img, 0, 0);
 }
 
-static void	fractol_loop(t_core *core, bool *p_is_inside,
-							unsigned int *p_fractal_iter)
+static void count_zim_zre(t_param *p, int fractal_type)
 {
-	unsigned int	n;
-	bool			is_inside;
+	if (fractal_type == MANDELBROT)
+	{
+		p->z_im = 2 * p->z_re * p->z_im + p->c_im;
+		p->z_re = p->z_re2 - p->z_im2 + p->c_re;
+	}
+	else if (fractal_type == JULIA)
+	{
+		p->z_im = 2 * p->z_re * p->z_im + p->constant_im;
+		p->z_re = p->z_re2 - p->z_im2 + p->constant_re;
+	}
+}
 
+static void fractol_loop(t_core *core, bool *p_is_inside,
+						 unsigned int *p_fractal_iter)
+{
+	unsigned int n;
+	bool is_inside;
+	t_param *p;
+
+	p = &core->param;
 	is_inside = true;
 	n = 0;
 	while (n < MAX_ITER)
 	{
-		core->param.z_re2 = core->param.z_re * core->param.z_re;
-		core->param.z_im2 = core->param.z_im * core->param.z_im;
-		if (core->param.z_re2 + core->param.z_im2 > 4)
+		p->z_re2 = p->z_re * p->z_re;
+		p->z_im2 = p->z_im * p->z_im;
+		if (p->z_re2 + p->z_im2 > 4)
 		{
 			is_inside = false;
-			break ;
+			break;
 		}
-		if (core->fractal_type == MANDELBROT)
-		{
-			core->param.z_im = 2 * core->param.z_re * core->param.z_im
-				+ core->param.c_im;
-			core->param.z_re = core->param.z_re2 - core->param.z_im2
-				+ core->param.c_re;
-		}
-		else if (core->fractal_type == JULIA)
-		{
-			core->param.z_im = 2 * core->param.z_re * core->param.z_im
-				+ core->param.constant_im;
-			core->param.z_re = core->param.z_re2 - core->param.z_im2
-				+ core->param.constant_re;
-		}
+		count_zim_zre(p, core->fractal_type);
 		n++;
 	}
 	*p_is_inside = is_inside;
 	*p_fractal_iter = n;
-}
-
-static void	set_color(t_core *core, const unsigned int fractal_iter,
-						const bool is_inside)
-{
-	int	color;
-
-	color = 0xfffafa;
-	core->param.z_re2 = core->param.z_re * core->param.z_re;
-	core->param.z_im2 = core->param.z_im * core->param.z_im;
-	if (is_inside)
-		color = ceil(sqrt(core->param.z_im2 + core->param.z_re2) * 8.0);
-	else
-		color = (int)(fractal_iter) % 16;
-	color = get_classic(color);
-	put_color(core, color);
 }

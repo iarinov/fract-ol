@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:15:10 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 16:03:00 by aiarinov         ###   ########.fr       */
+/*   Updated: 2022/06/15 22:33:04 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int		handle_key(int keycode, t_core *core);
 int		clean(t_core *core);
 int		mouse_move(int keycode, int x, int y, t_core *core);
 int		destroy(t_core *core);
-void	paint_mandelbrot(t_core *core);
+
 
 #endif

@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+         #
+#    By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/15 19:50:45 by annaiarinov       #+#    #+#              #
-#    Updated: 2022/06/15 16:30:04 by aiarinov         ###   ########.fr        #
+#    Updated: 2022/06/15 22:34:06 by annaiarinov      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLAGS = -Wall -Wextra -Werror
 NAME = fractol
-SRC = main.c fractol.c window.c utils.c
+SRC = main.c fractol.c window.c utils.c input_control.c color.c
 
 OBJ = $(SRC:.c=.o)
 

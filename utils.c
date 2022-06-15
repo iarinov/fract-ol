@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
+/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:38:26 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 16:01:22 by aiarinov         ###   ########.fr       */
+/*   Updated: 2022/06/15 22:43:13 by annaiarinov      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,24 @@ int	ft_atoi_point(const char *str)
 
 double	ft_atof(char *str)
 {
-	int		n;
 	int		i;
-	int		mult;
 	int		counter;
 	double	res;
 	int		is_after_dot;
 
-	n = 0;
 	i = ft_atoi_point(str);
-	mult = 1;
 	counter = 0;
 	is_after_dot = 0;
-	while (str[n] != '\0')
+	while (*str != '\0')
 	{
-		if (str[n] == '.')
+		if (*str == '.')
 			is_after_dot = 1;
-		if (is_after_dot == 1 && str[n] <= '9' && str[n] >= '0')
+		if (is_after_dot == 1 && *str <= '9' && *str >= '0')
 			counter++;
-		n++;
+		str++;
 	}
 	if (counter > 0)
-	{
-		counter--;
-		mult = pow(10, counter);
-		res = i * (0.1 / mult);
-	}
+		res = i * (0.1 / pow(10, counter - 1));
 	else
 		res = i;
 	return (res);
