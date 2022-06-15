@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:38:26 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/05 16:55:17 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/15 16:01:22 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <stdio.h>
-int ft_atoi_point(const char *str)
+
+int	ft_atoi_point(const char *str)
 {
-	int sum;
-	int sign;
+	int	sum;
+	int	sign;
 
 	sum = 0;
 	sign = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\f' || *str == '\r' || *str == '\v')
+	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\f'
+		|| *str == '\r' || *str == '\v')
 		str++;
 	if (*str == '-')
 		sign = -1;
@@ -32,20 +33,26 @@ int ft_atoi_point(const char *str)
 		if (*str >= '0' && *str <= '9')
 			sum = sum * 10 + *str - '0';
 		else
-			break;
+			break ;
 		str++;
 	}
 	return (sign * sum);
 }
 
-double ft_atof(char *str)
+double	ft_atof(char *str)
 {
-	int n = 0;
-	int i = ft_atoi_point(str);
-	int mult = 1;
-	int counter = 0;
-	double res;
-	char is_after_dot = 0;
+	int		n;
+	int		i;
+	int		mult;
+	int		counter;
+	double	res;
+	int		is_after_dot;
+
+	n = 0;
+	i = ft_atoi_point(str);
+	mult = 1;
+	counter = 0;
+	is_after_dot = 0;
 	while (str[n] != '\0')
 	{
 		if (str[n] == '.')
