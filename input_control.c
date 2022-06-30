@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   input_control.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 20:15:50 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 22:47:23 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/16 11:03:21 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input_control.h"
 
-# define MAN_STR	("Mandelbrot")
-# define JUL_STR	("Julia")
-
 static int	get_fractal_name(char *name)
 {
 	if (name == NULL)
-		return(0);
+		return (0);
 	if (ft_strncmp(name, MAN_STR, 11) == 0)
 		return (1);
 	else if (ft_strncmp(name, JUL_STR, 6) == 0)
@@ -28,9 +25,9 @@ static int	get_fractal_name(char *name)
 
 static int	digitals_notvalid(char *a, char *b)
 {
-	double first_param;
-	double second_param;
-	int	i;
+	double	first_param;
+	double	second_param;
+	int		i;
 
 	i = 0;
 	while (a[i] != '\0')
@@ -50,14 +47,16 @@ static int	digitals_notvalid(char *a, char *b)
 	}
 	first_param = ft_atof(a);
 	second_param = ft_atof(b);
-	return (first_param > DBL_MAX || first_param < -DBL_MAX || second_param < -DBL_MAX || second_param > DBL_MAX);
+	return (first_param > DBL_MAX || first_param < -DBL_MAX
+		|| second_param < -DBL_MAX || second_param > DBL_MAX);
 }
 
-int		is_valid_argument(int argc, char **argv)
+int	is_valid_argument(int argc, char **argv)
 {
 	if (argc == 1 || get_fractal_name(argv[1]) == 0 || argc == 3)
 		return (0);
-	else if (argc == 4 && get_fractal_name(argv[1]) == JULIA && digitals_notvalid (argv[2], argv[3]))
+	else if (argc == 4 && get_fractal_name(argv[1]) == JULIA
+		&& digitals_notvalid (argv[2], argv[3]))
 		return (0);
 	return (1);
 }

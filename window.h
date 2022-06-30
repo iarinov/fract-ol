@@ -3,26 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:15:10 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 22:33:04 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/16 15:04:05 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WINDOW_H
 # define WINDOW_H
 
-# define MAX_ITER (50)
-# define IMG_HEIGHT (600)
-# define IMG_WIDTH (600)
-# define JULIA (2)
-# define MANDELBROT (1)
-# define ESC_PRESS(x) (x == 53 || x == 12)
-# define LEFT_PRESS(x) (x == 123)
-# define RIGHT_PRESS(x) (x == 124)
-# define DOWN_PRESS(x) (x == 125)
-# define UP_PRESS(x) (x == 126)
+# define MAX_ITER 50
+# define IMG_HEIGHT 600
+# define IMG_WIDTH 600
+# define JULIA 2
+# define MANDELBROT 1
 
 # include <math.h>
 # include <stdlib.h>
@@ -66,6 +61,7 @@ typedef struct param
 	int				bpp;
 	int				line_len;
 	int				endian;
+	bool			is_inside;
 
 }	t_param;
 
@@ -80,6 +76,5 @@ int		handle_key(int keycode, t_core *core);
 int		clean(t_core *core);
 int		mouse_move(int keycode, int x, int y, t_core *core);
 int		destroy(t_core *core);
-
 
 #endif

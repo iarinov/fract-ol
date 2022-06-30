@@ -3,34 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 18:28:15 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 22:50:24 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/16 14:56:58 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
 #include "color.h"
 
-static void fractol_loop(t_core *core, bool *p_is_inside,
-						 unsigned int *p_fractal_iter);
+static void	fractol_loop(t_core *core, bool *p_is_inside,
+				unsigned int *p_fractal_iter);
 
-static void init_mandel_param(t_core *core)
+static void	init_mandel_param(t_core *core)
 {
-	t_param *p;
+	t_param	*p;
 
 	p = &core->param;
-	core->param.max_im = core->param.min_im + (core->param.max_re - core->param.min_re) * core->mlx_main.win_heigh / core->mlx_main.win_width;
-	core->param.re_factor = (core->param.max_re - core->param.min_re) / (core->mlx_main.win_width - 1);
-	core->param.im_factor = (core->param.max_im - core->param.min_im) / (core->mlx_main.win_heigh - 1);
+	p->max_im = p->min_im + (p->max_re - p->min_re) * core->mlx_main.win_heigh
+		/ core->mlx_main.win_width;
+	p->re_factor = (p->max_re - p->min_re) / (core->mlx_main.win_width - 1);
+	p->im_factor = (p->max_im - p->min_im) / (core->mlx_main.win_heigh - 1);
 }
 
-void paint_fractol(t_core *core)
+void	paint_fractol(t_core *core)
 {
-	unsigned int n;
-	bool is_inside;
-	t_param *p;
+	unsigned int	n;
+	t_param			*p;
 
 	p = &core->param;
 	p->y = 0;
@@ -45,18 +45,18 @@ void paint_fractol(t_core *core)
 			p->c_re = (p->min_re + p->x * p->re_factor) / p->zoom + p->horis;
 			p->z_re = p->c_re;
 			p->z_im = p->c_im;
-			is_inside = true;
-			fractol_loop(core, &is_inside, &n);
-			set_color(core, n, is_inside);
+			p->is_inside = true;
+			fractol_loop(core, &p->is_inside, &n);
+			set_color(core, n, p->is_inside);
 			p->x++;
 		}
 		p->y++;
 	}
 	mlx_put_image_to_window(core->mlx_main.mlx_ptr, core->mlx_main.mlx_win,
-							core->mlx_main.mlx_img, 0, 0);
+		core->mlx_main.mlx_img, 0, 0);
 }
 
-static void count_zim_zre(t_param *p, int fractal_type)
+static void	count_zim_zre(t_param *p, int fractal_type)
 {
 	if (fractal_type == MANDELBROT)
 	{
@@ -70,12 +70,12 @@ static void count_zim_zre(t_param *p, int fractal_type)
 	}
 }
 
-static void fractol_loop(t_core *core, bool *p_is_inside,
-						 unsigned int *p_fractal_iter)
+static void	fractol_loop(t_core *core, bool *p_is_inside,
+						unsigned int *p_fractal_iter)
 {
-	unsigned int n;
-	bool is_inside;
-	t_param *p;
+	unsigned int	n;
+	bool			is_inside;
+	t_param			*p;
 
 	p = &core->param;
 	is_inside = true;
@@ -87,7 +87,7 @@ static void fractol_loop(t_core *core, bool *p_is_inside,
 		if (p->z_re2 + p->z_im2 > 4)
 		{
 			is_inside = false;
-			break;
+			break ;
 		}
 		count_zim_zre(p, core->fractal_type);
 		n++;

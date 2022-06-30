@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 14:38:26 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 22:43:13 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/16 11:03:45 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

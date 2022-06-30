@@ -3,28 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   window.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:06:34 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 22:33:16 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/16 15:04:36 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "window.h"
-# include "fractol.h"
+#include "fractol.h"
 
 int	handle_key(int keycode, t_core *core)
 {
-	if (ESC_PRESS(keycode))
+	if (keycode == 53 || keycode == 12)
 		destroy(core);
-	if (LEFT_PRESS(keycode))
+	if (keycode == 123)
 		core->param.horis -= 0.1;
-	else if (RIGHT_PRESS(keycode))
+	else if (keycode == 124)
 		core->param.horis += 0.1;
-	else if (DOWN_PRESS(keycode))
+	else if (keycode == 125)
 		core->param.vert += 0.1;
-	else if (UP_PRESS(keycode))
+	else if (keycode == 126)
 		core->param.vert -= 0.1;
+	else if (keycode == 27 || keycode == 78)
+		core->param.zoom *= 0.8;
+	else if (keycode == 24 || keycode == 69)
+		core->param.zoom *= 1.2;
 	else
 		return (0);
 	clean(core);
@@ -50,13 +54,13 @@ int	mouse_move(int keycode, int x, int y, t_core *core)
 {
 	x = 0;
 	y = 0;
-	if (keycode == 4 || keycode == 27 || keycode == 78)
-	{
-		core->param.zoom *= 1.2;
-	}
-	else if (keycode == 5 || keycode == 24 || keycode == 69)
+	if (keycode == 4)
 	{
 		core->param.zoom *= 0.8;
+	}
+	else if (keycode == 5)
+	{
+		core->param.zoom *= 1.2;
 	}
 	else
 		return (0);

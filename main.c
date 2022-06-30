@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 17:58:25 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 22:49:23 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/16 11:03:39 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

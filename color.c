@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: annaiarinovskaia <annaiarinovskaia@stud    +#+  +:+       +#+        */
+/*   By: aiarinov <aiarinov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 22:04:57 by annaiarinov       #+#    #+#             */
-/*   Updated: 2022/06/15 22:07:35 by annaiarinov      ###   ########.fr       */
+/*   Updated: 2022/06/16 11:03:07 by aiarinov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	put_color(const t_core *core, int color)
 			+ core->param.x * (core->param.bpp / 8));
 	*(int *)pos = color;
 }
-
 
 void	set_color(t_core *core, const unsigned int fractal_iter,
 						const bool is_inside)
