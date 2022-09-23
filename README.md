@@ -9,8 +9,8 @@ Discovering the mathematical notion of complex numbers, to take a peek at the co
 
 ## Usage
 ```
-git clone 
-cd [name of your repo]
+git clone https://github.com/iarinov/fract-ol.git
+cd fract-ol
 make
 ./fractol Mandelbrot
 ./fractol Julia
