@@ -1,4 +1,4 @@
-# FRACTOL
+# Fractol
 **Computer Graphics Fractals**
 
 ## About
